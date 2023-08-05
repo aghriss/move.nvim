@@ -44,6 +44,15 @@ Plug 'fedepujol/move.nvim'
 
 ## Usage
 
+### Setup
+
+```lua
+require("move").setup({
+    load_commands = true -- or false, whether to define the user command bellow
+    })
+
+```
+
 The plugin provides the following commands:
 
 | Command    | Description                                           | Mode   |
@@ -93,6 +102,28 @@ vim.keymap.set('v', '<A-h>', ':MoveHBlock(-1)<CR>', opts)
 vim.keymap.set('v', '<A-l>', ':MoveHBlock(1)<CR>', opts)
 ```
 
+You can also call lua scripts directly:
+
+````lua
+
+```lua
+local opts = { noremap = true, silent = true }
+-- Normal-mode commands
+vim.keymap.set("n", "<A-j>", function() require("move").MoveLine(1) end, opts)
+vim.keymap.set("n", "<A-k>", function() require("move").MoveLine(-1) end, opts)
+vim.keymap.set("n", "<A-h>", function() require("move").MoveHChar(-1) end, opts)
+vim.keymap.set("n", "<A-l>", function() require("move").MoveHChar(1) end, opts)
+vim.keymap.set("n", "<leader>wf", function() require("move").MoveWord(1) end, opts)
+vim.keymap.set("n", "<leader>wb", function() require("move").MoveWord(-1) end, opts)
+
+-- Visual-mode commands
+vim.keymap.set("v", "<A-j>", function() require("move").MoveBlock(1) end, opts)
+vim.keymap.set("v", "<A-k>", function() require("move").MoveBlock(-1) end, opts)
+vim.keymap.set("v", "<A-h>", function() require("move").MoveHBlock(-1) end, opts)
+vim.keymap.set("v", "<A-l>", function() require("move").MoveHBlock(1) end, opts)
+````
+
+````
 ## Integration
 
 ### [Legendary.nvim](https://github.com/mrjones2014/legendary.nvim)
@@ -110,7 +141,7 @@ require('legendary').setup({
         ...
     }
 })
-```
+````
 
 ## Mention
 
